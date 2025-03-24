@@ -62,13 +62,23 @@ const Analytics = ({ allTransection }) => {
               <div className="d-flex flex-column align-items-center">
                 <Progress
                   type="circle"
-                  strokeColor={"green"}
+                  strokeColor={{
+                    "0%": "#FF6B6B",
+                    "100%": "#D32F2F",
+                  }}
+                  style={{
+                    filter: "drop-shadow(4px 4px 10px rgba(0,0,0,0.2))",
+                  }}
                   className="mx-2"
+                  
                   percent={totalIncomePercent.toFixed(0)}
                 />
                 <Progress
                   type="circle"
-                  strokeColor={"red"}
+                  strokeColor={{
+                    "0%": "#4CAF50",
+                    "100%": "#2E7D32",
+                  }}
                   className="mx-2 mt-3"
                   percent={totalExpensePercent.toFixed(0)}
                 />
@@ -85,13 +95,19 @@ const Analytics = ({ allTransection }) => {
               <div>
                 <Progress
                   type="circle"
-                  strokeColor={"green"}
+                  strokeColor={{
+                    "0%": "#4CAF50",
+                    "100%": "#2E7D32",
+                  }}
                   className="mx-2"
                   percent={totalIncomeTurnoverPercent.toFixed(0)}
                 />
                 <Progress
                   type="circle"
-                  strokeColor={"red"}
+                  strokeColor={{
+                    "0%": "#FF6B6B",
+                    "100%": "#D32F2F",
+                  }}
                   className="mx-2 mt-3"
                   percent={totalExpenseTurnoverPercent.toFixed(0)}
                 />

@@ -12,7 +12,7 @@ const getAllTransection = async (req, res) => {
 
   
     const filter={
-      userId: userid,
+      userid: userid,
     }
     if (type !== "all") {
       filter.type = type;
