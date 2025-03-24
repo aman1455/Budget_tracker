@@ -2,27 +2,46 @@ const transectionModel = require("../models/transectionModel");
 const moment = require("moment");
 const getAllTransection = async (req, res) => {
   try {
-    const { frequency, selectedDate, type } = req.body;
-    const transections = await transectionModel.find({
-      ...(frequency !== "custom"
-        ? {
-            date: {
-              $gt: moment().subtract(Number(frequency), "d").toDate(),
-            },
-          }
-        : {
-            date: {
-              $gte: selectedDate[0],
-              $lte: selectedDate[1],
-            },
-          }),
-      userid: req.body.userid,
-      ...(type !== "all" && { type }),
-    });
-    res.status(200).json(transections);
+    const { frequency, selectedDate, type, userid } = req.body;
+
+    
+
+    if (!userid) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+  
+    const filter={
+      userId: userid,
+    }
+    if (type !== "all") {
+      filter.type = type;
+    }
+    console.log(filter);
+    if(frequency==="custom") {
+      filter.createdAt= {
+        $gte: new Date(selectedDate[0]), 
+        $lte: new Date(selectedDate[1]), 
+      }
+    }else if(frequency==="7"){
+      filter.createdAt= {
+        $gte: moment().subtract(7, 'days').toDate(),
+      }
+    } else if(frequency==="30"){
+      filter.createdAt= {
+        $gte: moment().subtract(30, 'days').toDate(),
+      }
+    } else if(frequency==="365"){
+      filter.createdAt= {
+        $gte: moment().subtract(365, 'days').toDate(),
+      }
+    }
+
+    const transactions = await transectionModel.find(filter);
+    res.status(200).json(transactions);
   } catch (error) {
-    console.log(error);
-    res.status(500).json(erorr);
+    console.error("Error:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 

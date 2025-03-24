@@ -18,6 +18,6 @@ router.post("/edit-transection", editTransection);
 router.post("/delete-transection", deleteTransection);
 
 //get transections
-router.post("/get-transection", getAllTransection);
+router.post("/get-transection",getAllTransection);
 
 module.exports = router;
