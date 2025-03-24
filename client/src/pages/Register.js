@@ -7,11 +7,12 @@ import "../styles/RegisterPage.css";
 const Register = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  console.log("Register", process.env.REACT_APP_NODE_URL)
   //from submit
   const submitHandler = async (values) => {
     try {
       setLoading(true);
-      await axios.post(`${process.env.NODE_URL}api/v1/users/register`, values);
+      await axios.post(`${process.env.REACT_APP_NODE_URL}api/v1/users/register`, values);
       message.success("Registeration Successfull");
       setLoading(false);
       navigate("/login");

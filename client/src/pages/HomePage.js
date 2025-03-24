@@ -16,6 +16,7 @@ const { RangePicker } = DatePicker;
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(false);
   const [allTransection, setAllTransection] = useState([]);
   const [frequency, setFrequency] = useState("7");
   const [selectedDate, setSelectedate] = useState([]);
@@ -27,7 +28,7 @@ const HomePage = () => {
   const columns = [
     {
       title: "Date",
-      dataIndex: "date",
+      dataIndex: "createdAt",
       render: (text) => <span>{moment(text).format("YYYY-MM-DD")}</span>,
     },
     {
@@ -68,14 +69,12 @@ const HomePage = () => {
   ];
 
   //getall transactions
-
-  //useEffect Hook
   useEffect(() => {
     const getAllTransactions = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         setLoading(true);
-        const res = await axios.post("/api/v1/transections/get-transection", {
+        const res = await axios.post(`${process.env.REACT_APP_NODE_URL}api/v1/transections/get-transection`, {
           userid: user._id,
           frequency,
           selectedDate,
@@ -88,16 +87,17 @@ const HomePage = () => {
       }
     };
     getAllTransactions();
-  }, [frequency, selectedDate, type, setAllTransection]);
+  }, [frequency, selectedDate, type,reload ]);
 
   //delete handler
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/api/v1/transections/delete-transection", {
+      await axios.post(`${process.env.REACT_APP_NODE_URL}api/v1/transections/delete-transection`, {
         transacationId: record._id,
       });
       setLoading(false);
+      setReload(!reload);
       message.success("Transaction Deleted!");
     } catch (error) {
       setLoading(false);
@@ -112,20 +112,22 @@ const HomePage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/api/v1/transections/edit-transection", {
+        await axios.post(`${process.env.REACT_APP_NODE_URL}api/v1/transections/edit-transection`, {
           payload: {
             ...values,
             userId: user._id,
           },
           transacationId: editable._id,
         });
+        setReload(!reload);
         setLoading(false);
         message.success("Transaction Updated Successfully");
       } else {
-        await axios.post("/api/v1/transections/add-transection", {
+        await axios.post(`${process.env.REACT_APP_NODE_URL}api/v1/transections/add-transection`, {
           ...values,
           userid: user._id,
         });
+        setReload(!reload);
         setLoading(false);
         message.success("Transaction Added Successfully");
       }
