@@ -30,22 +30,23 @@ const Register = () => {
   }, [navigate]);
   return (
     <>
-      <div className="register-page ">
+      <div className="register-page">
         {loading && <Spinner />}
         <Form
           className="register-form"
           layout="vertical"
           onFinish={submitHandler}
         >
-          <h2>Register Form</h2>
+          <h2 >Register Form</h2>
+          
           <Form.Item label="Name" name="name">
-            <Input type="text" required />
+            <Input type="text" required placeholder="Name" />
           </Form.Item>
           <Form.Item label="Email" name="email">
-            <Input type="email" required />
+            <Input type="email" required placeholder="Email" />
           </Form.Item>
           <Form.Item label="Password" name="password">
-            <Input type="password" required />
+            <Input type="password" required placeholder="Password" />
           </Form.Item>
           <div className="d-flex justify-content-between">
             <Link to="/login">Already Register? login here!</Link>
@@ -53,6 +54,7 @@ const Register = () => {
           </div>
         </Form>
       </div>
+     
     </>
   );
 };

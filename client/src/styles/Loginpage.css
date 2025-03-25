@@ -6,26 +6,29 @@
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.login-page h1 {
-}
+
 .login-form {
-  background-color: #b9bcccb6;
+  background-color: #f3f3f3;
   margin-left: -15px;
   padding: 30px;
+}
+.head-text{
+  color: #6a5acd;
+  font-weight: bold;
 }
 
 .login-form h1 {
   text-align: center;
   font-weight: bold;
   margin: 30px;
-  color: #344265;
+  color: #6a5acd;
 }
 
 .login-form .ant-form-item-label label {
-  color: #344265 !important;
+  color: #6a5acd !important;
 }
 .login-form button {
-  background-color: #344265;
+  background: linear-gradient(to right, #6a5acd, #00c6ff);
   color: white;
   outline: none;
 }

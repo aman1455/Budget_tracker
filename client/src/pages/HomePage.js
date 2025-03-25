@@ -142,6 +142,7 @@ const HomePage = () => {
   return (
     <Layout>
       {loading && <Spinner />}
+      <div className="home-page">
       <div className="filters">
         <div>
           <h6>Select Frequency</h6>
@@ -182,7 +183,7 @@ const HomePage = () => {
         </div>
         <div>
           <button
-            className="btn btn-primary"
+            className="btn bg-[#6A5ACD]"
             onClick={() => setShowModal(true)}
           >
             Add New
@@ -195,6 +196,11 @@ const HomePage = () => {
         ) : (
           <Analytics allTransection={allTransection} />
         )}
+      </div>
+      <div className="w-100 text-center py-2 bg-[#f3f3f3] text-black">
+       <div className="set-budget">hi</div>
+        </div>
+
       </div>
       <Modal
         title={editable ? "Edit Transaction" : "Add Transection"}

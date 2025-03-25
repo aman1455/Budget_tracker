@@ -33,19 +33,19 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <div className="collapse navbar-collapse !text-[#6a5acd]" id="navbarTogglerDemo01">
             <Link className="navbar-brand" to="/">
            MoneyMap
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 {" "}
-                <h6 className="nav-link ">
+                <h6 className="nav-link flex align-items-center">
                   <UserOutlined /> {loginUser && loginUser.name}
                 </h6>{" "}
               </li>
               <li className="nav-item">
-                <button className="btn btn-danger" onClick={logoutHandler}>
+                <button className="px-3 py-2 bg-danger text-white border-0 rounded" onClick={logoutHandler}>
                   Logout
                 </button>
               </li>

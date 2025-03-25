@@ -1,8 +1,8 @@
 .navbar {
-  background-color: #6f4e3742 !important;
+  background-color: #f3f3f3 !important;
 }
 .navbar .navbar-brand {
-  color: #6f4e37 !important;
+  color: #6a5acd !important;
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -14,4 +14,8 @@
 .navbar h6 {
   margin-top: 0px;
   margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:2
 }

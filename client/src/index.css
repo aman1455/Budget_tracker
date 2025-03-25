@@ -1,11 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-.content {
-  height: 100%;
+.home-page {
+  min-height: 82vh;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.btn{
+  background-color: #6a5acd;
+  color: white;
+}
+.set-budget { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 /* transection page */
