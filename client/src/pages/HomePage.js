@@ -20,6 +20,7 @@ const HomePage = () => {
   const [allTransection, setAllTransection] = useState([]);
   const [frequency, setFrequency] = useState("7");
   const [selectedDate, setSelectedate] = useState([]);
+  const [AllGols, setSetAllGols] = useState([]);
   const [type, setType] = useState("all");
   const [viewData, setViewData] = useState("table");
   const [editable, setEditable] = useState(null);
@@ -89,6 +90,20 @@ const HomePage = () => {
     getAllTransactions();
   }, [frequency, selectedDate, type,reload ]);
 
+  //get gols
+  useEffect(() => {
+    const getAllGols = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const res = await axios.get(`${process.env.REACT_APP_NODE_URL}api/v1/budgets/get-budget/${user._id}`)
+        setSetAllGols(res.data);
+      } catch (error) {
+        message.error("Ftech Issue With Gol");
+      }
+    };
+    getAllGols();
+  }, []);
+
   //delete handler
   const handleDelete = async (record) => {
     try {
@@ -139,7 +154,11 @@ const HomePage = () => {
     }
   };
 
-  return (
+  const dailyGols = AllGols.filter((item)=>item.type === "daily");
+  const weeklyGols = AllGols.filter((item)=>item.type === "weekly");
+  const monthlyGols = AllGols.filter((item)=>item.type === "monthly");
+     
+  return ( 
     <Layout>
       {loading && <Spinner />}
       <div className="home-page">
@@ -197,10 +216,23 @@ const HomePage = () => {
           <Analytics allTransection={allTransection} />
         )}
       </div>
-      <div className="w-100 text-center py-2 bg-[#f3f3f3] text-black">
-       <div className="set-budget">hi</div>
+     
+      <div>
+        <div className="goals-head mt-4">
+        <div> <h4>Budget Goals</h4></div>
+        <button className="btn">Add Goals</button>
         </div>
-
+        <div className="goals-head mt-3">
+        <div>
+          <h6>Daily Budget Goal is  {dailyGols[0].amount}</h6>
+        </div>
+        <div>
+        <h6>Daily Budget Goal is  {weeklyGols[0].amount}</h6>
+          </div>
+        <div>
+          <h6>Monthly Budget Goal is {monthlyGols[0].amount}</h6></div>
+        </div>
+      </div>
       </div>
       <Modal
         title={editable ? "Edit Transaction" : "Add Transection"}

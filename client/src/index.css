@@ -23,6 +23,12 @@
   height: 100vh;
 }
 
+.goals-head{
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
 /* transection page */
 .filters {
   display: flex;
