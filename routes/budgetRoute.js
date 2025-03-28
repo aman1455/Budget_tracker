@@ -6,4 +6,6 @@ router.post('/add-budget', budgetController.addBudget);
 
 router.get('/get-budget/:id', budgetController.getBudget);
 
+router.get('/get-expense/:id', budgetController.getExpense);
+
 module.exports = router;

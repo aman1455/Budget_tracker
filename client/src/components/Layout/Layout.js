@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     <>
     <div className="h-screen ">
       <Header />
-      <div className="content container">{children}</div>
+      <div className="content px-4 pt-4">{children}</div>
       
       <Footer />
     </div>

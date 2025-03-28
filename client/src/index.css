@@ -1,16 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+  font-size: medium;
+  font-weight: 500;
 }
 
 .home-page {
   min-height: 82vh;
+  width: 100%;
+
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+}
+
+.content{
+  background-color: #f3f3f3;
 }
 .btn{
   background-color: #6a5acd;
@@ -23,19 +34,16 @@
   height: 100vh;
 }
 
-.goals-head{
-  display: flex;
-  justify-content: space-between;
-  background-color: #fff;
-}
 
-/* transection page */
+
+
 .filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 20px;
   box-shadow: 0 0 3px gray;
+  background-color: #ffffff;
   margin-bottom: 10px;
 }
 /* transection page */
@@ -62,4 +70,59 @@
 
 .filter-tab .ant-select-selector {
   width: 150px !important;
+}
+
+.goals-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f3f3f3;
+}
+
+.goals{
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+}
+
+.extrude {
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  min-height: 200px;
+  width: 390px; 
+  margin: 0 auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.extrude:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-8px);
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .goals-head {
+    flex-direction: row; /* Switch to horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    justify-content: center; /* Center cards in the row */
+  }
+  
+  .extrude {
+    margin: 0; /* Remove centering margin in row layout */
+    flex: 1; /* Allow cards to grow equally */
+    min-width: 200px; /* Minimum width before wrapping */
+  }
+}
+
+/* Optional: Adjust for very small screens */
+@media (max-width: 400px) {
+  .extrude {
+    max-width: 100%; /* Full width on very small screens */
+  }
 }
