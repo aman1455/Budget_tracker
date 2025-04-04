@@ -18,32 +18,32 @@ const Analytics = ({ allTransection }) => {
   const totalTransaction = allTransection.length;
   const totalIncomeTransactions = allTransection.filter(
     (transaction) => transaction.type === "income"
-  );
+  ) || [];
   const totalExpenseTransactions = allTransection.filter(
     (transaction) => transaction.type === "expense"
-  );
+  ) || [];
   const totalIncomePercent =
-    (totalIncomeTransactions.length / totalTransaction) * 100;
+    (totalIncomeTransactions.length / totalTransaction) * 100  || 0;
   const totalExpensePercent =
-    (totalExpenseTransactions.length / totalTransaction) * 100;
+    (totalExpenseTransactions.length / totalTransaction) * 100 || 0;
 
   //total turnover
   const totalTurnover = allTransection.reduce(
     (acc, transaction) => acc + transaction.amount,
     0
-  );
+  ) || 0;
   const totalIncomeTurnover = allTransection
     .filter((transaction) => transaction.type === "income")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+    .reduce((acc, transaction) => acc + transaction.amount, 0)  || 0;
 
   const totalExpenseTurnover = allTransection
     .filter((transaction) => transaction.type === "expense")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+    .reduce((acc, transaction) => acc + transaction.amount, 0) || 0;
 
   const totalIncomeTurnoverPercent =
-    (totalIncomeTurnover / totalTurnover) * 100;
+    (totalIncomeTurnover / totalTurnover) * 100 || 0;
   const totalExpenseTurnoverPercent =
-    (totalExpenseTurnover / totalTurnover) * 100;
+    (totalExpenseTurnover / totalTurnover) * 100 || 0;
   return (
     <>
       <div className="row m-3">
@@ -52,14 +52,16 @@ const Analytics = ({ allTransection }) => {
             <div className="card-header">
               Total Transactions : {totalTransaction}
             </div>
-            <div className="card-body">
+            <div className="card-body ">
+              <div className="d-flex  justify-content-between align-items-center">
               <h5 className="text-success">
                 Income : {totalIncomeTransactions.length}
               </h5>
               <h5 className="text-danger">
                 Expense : {totalExpenseTransactions.length}
               </h5>
-              <div className="d-flex flex-column align-items-center">
+              </div>         
+              <div className="d-flex flex-row align-items-center">
                 <Progress
                   type="circle"
                   strokeColor={{
@@ -88,10 +90,12 @@ const Analytics = ({ allTransection }) => {
         </div>
         <div className="col-md-3">
           <div className="card">
-            <div className="card-header">Total TurnOver : {totalTurnover}</div>
+            <div className="card-header rounded-2">Total TurnOver : {totalTurnover}</div>
             <div className="card-body">
+              <div className="d-flex  justify-content-between align-items-center">
               <h5 className="text-success">Income : {totalIncomeTurnover}</h5>
               <h5 className="text-danger">Expense : {totalExpenseTurnover}</h5>
+              </div>
               <div>
                 <Progress
                   type="circle"
@@ -116,7 +120,7 @@ const Analytics = ({ allTransection }) => {
           </div>
         </div>
         <div className="col-md-3">
-          <h6 className="bg-dark p-2 text-light">Categorywise Income</h6>
+          <h6 className="bg-[#6a5acd] p-2 text-light rounded-2" style={{backgroundColor:"#6a5acd"}}>Categorywise Income</h6>
           {categories.map((category) => {
             const amount = allTransection
               .filter(
@@ -142,7 +146,7 @@ const Analytics = ({ allTransection }) => {
           })}
         </div>
         <div className="col-md-3">
-          <h6 className="bg-warning p-2 text-light">Categorywise Expense</h6>
+          <h6 className="bg-warning p-2 text-light rounded-2">Categorywise Expense</h6>
           {categories.map((category) => {
             const amount = allTransection
               .filter(
