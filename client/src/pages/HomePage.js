@@ -27,7 +27,7 @@ const HomePage = () => {
   const [type, setType] = useState("all");
   const [viewData, setViewData] = useState("table");
   const [editable, setEditable] = useState(null);
-  const [editable2, setEditable2] = useState(null);
+  const [editable2, setEditable2] = useState(false);
 
   //table data
   const columns = [
@@ -58,6 +58,7 @@ const HomePage = () => {
         <div>
           <EditOutlined
             onClick={() => {
+              setEditable2(true);
               setEditable(record);
               setShowModal(true);
             }}
@@ -256,7 +257,7 @@ const HomePage = () => {
           <div>
             <button
               className="btn bg-[#6A5ACD]"
-              onClick={() => setShowModal(true)}
+              onClick={() =>{setEditable(false); setShowModal(true)}}
             >
               Add New
             </button>
@@ -269,7 +270,7 @@ const HomePage = () => {
             <Analytics allTransection={allTransection} />
           )}
         </div>
-
+{console.log("data", editable2)}
         <div className="goals-content">
           <div className="goals mt-4">
             <div> <h4 className="!text-[#6a5acd]">Budget Goals</h4></div>
