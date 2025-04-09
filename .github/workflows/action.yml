@@ -1,0 +1,49 @@
+name: MERN CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  install-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Create backend .env file
+        run: |
+          echo "PORT=${{ secrets.PORT }}" >> .env
+          echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> .env
+          echo "REACT_APP_NODE_URL=${{ secrets.REACT_APP_NODE_URL }}" >> .env
+
+      - name: Create frontend .env file
+        working-directory: ./client
+        run: |
+          echo "REACT_APP_NODE_URL=${{ secrets.REACT_APP_NODE_URL }}" >> .env
+
+      - name: Install backend dependencies
+        run: npm install
+
+      - name: Install frontend dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Build frontend
+        working-directory: ./client
+        run: npm run build
+
+      - name: Check backend code (optional)
+        run: |
+          echo "✅ Backend code installed successfully."
+
+      - name: Done 🎉
+        run: echo "Install and Build Successful!"
